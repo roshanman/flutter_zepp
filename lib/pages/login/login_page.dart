@@ -6,6 +6,13 @@ import '../../images.dart';
 
 final _checkboxProvider = StateProvider<bool>((ref) => false);
 final _showPasswordProvider = StateProvider<bool>((ref) => false);
+final _accountTextProvider = StateProvider<String>((ref) => "");
+final _passswordTextProvider = StateProvider<String>((ref) => "");
+final _loginButtonEnabledProvider = Provider((ref) {
+  final String accountText = ref.watch(_accountTextProvider);
+  final String passwordText = ref.watch(_passswordTextProvider);
+  return accountText.length >= 6 && passwordText.length >= 6;
+});
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -14,6 +21,7 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isChecked = ref.watch(_checkboxProvider);
     final bool showPassword = ref.watch(_showPasswordProvider);
+    final bool loginButtonEnabled = ref.watch(_loginButtonEnabledProvider);
 
     final licenseCheckWidget = Container(
       padding: const EdgeInsets.only(bottom: 10),
@@ -108,7 +116,7 @@ class LoginPage extends ConsumerWidget {
         ],
       ),
       ElevatedButton(
-        onPressed: () => _loginButtonTapped(context),
+        onPressed: loginButtonEnabled ? () => _loginButtonTapped(context) : null,
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: Colors.blue,
@@ -141,6 +149,7 @@ class LoginPage extends ConsumerWidget {
     final textFieldWidget = [
       const SizedBox(height: 20),
       TextField(
+        onChanged: (value) => ref.read(_accountTextProvider.notifier).state = value,
         decoration: InputDecoration(
           hintText: "请输入手机号/邮箱号",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
@@ -151,6 +160,7 @@ class LoginPage extends ConsumerWidget {
       ),
       const SizedBox(height: 20),
       TextField(
+        onChanged: (value) => ref.read(_passswordTextProvider.notifier).state = value,
         obscureText: !showPassword,
         enableSuggestions: false,
         autocorrect: false,
