@@ -5,6 +5,7 @@ import '../../tabbar.dart';
 import '../../images.dart';
 
 final _checkboxProvider = StateProvider<bool>((ref) => false);
+final _showPasswordProvider = StateProvider<bool>((ref) => false);
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -12,6 +13,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isChecked = ref.watch(_checkboxProvider);
+    final bool showPassword = ref.watch(_showPasswordProvider);
 
     final licenseCheckWidget = Container(
       padding: const EdgeInsets.only(bottom: 10),
@@ -149,10 +151,14 @@ class LoginPage extends ConsumerWidget {
       ),
       const SizedBox(height: 20),
       TextField(
-        obscureText: true,
+        obscureText: !showPassword,
         enableSuggestions: false,
         autocorrect: false,
         decoration: InputDecoration(
+          suffixIcon: IconButton(
+            onPressed: () => ref.read(_showPasswordProvider.notifier).state = !showPassword,
+            icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
+          ),
           hintText: "请输入密码",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
