@@ -171,37 +171,41 @@ class LoginPage extends ConsumerWidget {
     return Stack(
       children: [
         Positioned.fill(child: Image.asset(LoginImages.bg_light, fit: BoxFit.cover)),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.arrow_back),
-            ),
+        GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Scaffold(
             backgroundColor: Colors.transparent,
-          ),
-          body: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 20),
-                      Image.asset(LoginImages.logo, width: 60, height: 60),
-                      ...textFieldWidget,
-                      ...buttonsWidget,
-                      ...thirdAuthWidget,
-                    ],
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.arrow_back),
+              ),
+              backgroundColor: Colors.transparent,
+            ),
+            body: CustomScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 20),
+                        Image.asset(LoginImages.logo, width: 60, height: 60),
+                        ...textFieldWidget,
+                        ...buttonsWidget,
+                        ...thirdAuthWidget,
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: licenseCheckWidget,
-              )
-            ],
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: licenseCheckWidget,
+                )
+              ],
+            ),
           ),
         ),
       ],
