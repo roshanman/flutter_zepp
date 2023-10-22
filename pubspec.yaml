@@ -36,6 +36,9 @@ flutter:
     - assets/images/login/bg_dark.png
     - assets/images/login/bg_light.png
     - assets/images/login/logo.png
+    - assets/images/login/login_method_apple.png 
+    - assets/images/login/login_method_wechat.png 
+    - assets/images/login/login_method_xiaomi.png
 
     - assets/images/tabbar/tabbar_icon_aura.png
     - assets/images/tabbar/tabbar_icon_aura_unselected.png
