@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:http/http.dart' as http;
 import '../../tabbar.dart';
 import '../../images.dart';
 
@@ -222,11 +224,31 @@ class LoginPage extends ConsumerWidget {
     );
   }
 
-  void _loginButtonTapped(BuildContext context) {
+  void _goHomePage(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
         return const MainTabBar();
       }),
     );
+  }
+
+  void _loginButtonTapped(BuildContext context) async {
+    EasyLoading.show(status: 'loading...');
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    var url = Uri.https('dummyjson.com', 'auth/login');
+    var response = await http.post(
+      url,
+      body: {'username': 'kminchelle', 'password': '0lelplR'},
+    );
+
+    EasyLoading.dismiss();
+
+    if (response.statusCode == 200) {
+      // ignore: use_build_context_synchronously
+      _goHomePage(context);
+    } else {
+      EasyLoading.showError('Login failed');
+    }
   }
 }

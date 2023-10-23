@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'pages/login/login_page.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const LoginPage(),
+      builder: EasyLoading.init(),
     );
   }
 }
