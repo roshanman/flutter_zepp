@@ -18,8 +18,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
-      builder: EasyLoading.init(),
+      home: LoginPage(),
+      builder: (context, widget) {
+        return EasyLoading.init()(context, widget);
+      },
     );
   }
 }
