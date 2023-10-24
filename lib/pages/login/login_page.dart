@@ -16,14 +16,29 @@ final _loginButtonEnabledProvider = Provider((ref) {
   return accountText.length >= 6 && passwordText.length >= 6;
 });
 
+final _showClearAccounTextIcontProvider = Provider<bool>((ref) {
+  final accountText = ref.watch(_accountTextProvider);
+  return accountText.isNotEmpty;
+});
+
+final _showClearPasswordTextIcontProvider = Provider<bool>((ref) {
+  final passwordText = ref.watch(_passswordTextProvider);
+  return passwordText.isNotEmpty;
+});
+
 class LoginPage extends ConsumerWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final _accountTexttextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isChecked = ref.watch(_checkboxProvider);
     final bool showPassword = ref.watch(_showPasswordProvider);
     final bool loginButtonEnabled = ref.watch(_loginButtonEnabledProvider);
+    final bool showClearAccountTextIcon = ref.watch(_showClearAccounTextIcontProvider);
+    final bool showClearPasswordTextIcon = ref.watch(_showClearPasswordTextIcontProvider);
 
     final licenseCheckWidget = Container(
       padding: const EdgeInsets.only(bottom: 10),
@@ -122,6 +137,7 @@ class LoginPage extends ConsumerWidget {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: Colors.blue,
+          disabledBackgroundColor: Colors.blue.withAlpha(100),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
@@ -151,8 +167,17 @@ class LoginPage extends ConsumerWidget {
     final textFieldWidget = [
       const SizedBox(height: 20),
       TextField(
+        controller: _accountTexttextController,
         onChanged: (value) => ref.read(_accountTextProvider.notifier).state = value,
         decoration: InputDecoration(
+          suffixIcon: !showClearAccountTextIcon
+              ? null
+              : IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () {
+                    _accountTexttextController.clear();
+                    ref.read(_accountTextProvider.notifier).state = '';
+                  }),
           hintText: "请输入手机号/邮箱号",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
@@ -162,14 +187,27 @@ class LoginPage extends ConsumerWidget {
       ),
       const SizedBox(height: 20),
       TextField(
+        controller: _passwordTextController,
         onChanged: (value) => ref.read(_passswordTextProvider.notifier).state = value,
         obscureText: !showPassword,
         enableSuggestions: false,
         autocorrect: false,
         decoration: InputDecoration(
-          suffixIcon: IconButton(
-            onPressed: () => ref.read(_showPasswordProvider.notifier).state = !showPassword,
-            icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (showClearPasswordTextIcon)
+                IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {
+                      _passwordTextController.clear();
+                      ref.read(_passswordTextProvider.notifier).state = '';
+                    }),
+              IconButton(
+                onPressed: () => ref.read(_showPasswordProvider.notifier).state = !showPassword,
+                icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
+              ),
+            ],
           ),
           hintText: "请输入密码",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
