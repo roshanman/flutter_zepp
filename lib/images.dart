@@ -26,3 +26,8 @@ extension TabbarImages on String {
   static const String workout = 'assets/images/tabbar/tabbar_icon_workout.png';
   static const String workout_unselected = 'assets/images/tabbar/tabbar_icon_workout_unselected.png';
 }
+
+extension MineImages on String {
+  static const String background_image = 'assets/images/profile/mine_background_image.png';
+  static const String avatar = 'assets/images/profile/avatar.png';
+}

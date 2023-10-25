@@ -70,7 +70,7 @@ class _MainTabBarState extends State<MainTabBar> {
       ),
       _TabWidgetConfig(
         tabType: TabType.home,
-        tabWidget: const MinePage(),
+        tabWidget: MinePage(),
         title: '我的',
         icon: Image.asset(TabbarImages.profile_unselected, width: 24, height: 24),
         activeIcon: Image.asset(TabbarImages.profile, width: 24, height: 24),

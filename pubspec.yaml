@@ -50,3 +50,6 @@ flutter:
     - assets/images/tabbar/tabbar_icon_status_unselected.png
     - assets/images/tabbar/tabbar_icon_workout.png
     - assets/images/tabbar/tabbar_icon_workout_unselected.png
+
+    - assets/images/profile/mine_background_image.png
+    - assets/images/profile/avatar.png
