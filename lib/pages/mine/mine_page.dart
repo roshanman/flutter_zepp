@@ -29,7 +29,6 @@ class MinePage extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(6)),
         color: Colors.transparent,
       ),
-      margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
@@ -73,67 +72,49 @@ class MinePage extends StatelessWidget {
   }
 
   Widget _buildMyDevicesWidget(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        color: Colors.white,
-      ),
-      margin: const EdgeInsets.only(bottom: 20),
+    return Material(
+      color: Colors.white,
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
       child: Column(
         children: [
-          Container(
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text("我的设备"),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: Text("+添加"),
-                padding: EdgeInsets.zero,
-              ),
+          ListTile(
+            title: const Text("我的设备"),
+            trailing: IconButton(
+              onPressed: () {},
+              icon: const Text("+添加"),
+              padding: EdgeInsets.zero,
             ),
           ),
-          ..._myDevices
-              .map((e) => ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(e),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
-                  ))
-              .map((e) => InkWell(
-                    child: e,
-                    onTap: () {},
-                  ))
-              .toList()
+          ..._myDevices.map((e) {
+            return InkWell(
+              onTap: () {},
+              child: ListTile(
+                title: Text(e),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+              ),
+            );
+          }).toList()
         ],
       ),
     );
   }
 
   Widget _buildMoreWidget(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      margin: const EdgeInsets.only(bottom: 20),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        color: Colors.white,
-      ),
+    return Material(
+      color: Colors.white,
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
       child: Column(
         children: [
-          const ListTile(
-            title: Text("更多"),
-            contentPadding: EdgeInsets.zero,
-          ),
-          ..._moreItems
-              .map((e) => ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(e),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
-                  ))
-              .map((e) => InkWell(
-                    child: e,
-                    onTap: () {},
-                  ))
-              .toList()
+          const ListTile(title: Text("更多")),
+          ..._moreItems.map((e) {
+            return InkWell(
+              onTap: () {},
+              child: ListTile(
+                title: Text(e),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+              ),
+            );
+          }).toList()
         ],
       ),
     );
@@ -158,12 +139,15 @@ class MinePage extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: _buildMineInfoWidget(context),
                 ),
+                const SliverToBoxAdapter(child: SizedBox(height: 10)),
                 SliverToBoxAdapter(
                   child: _buildMyDevicesWidget(context),
                 ),
+                const SliverToBoxAdapter(child: SizedBox(height: 20)),
                 SliverToBoxAdapter(
                   child: _buildMoreWidget(context),
                 ),
+                const SliverToBoxAdapter(child: SizedBox(height: 20)),
               ],
             ),
           ),
