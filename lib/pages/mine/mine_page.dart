@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zepp/images.dart';
 import 'package:riverpod/riverpod.dart';
+import '../../theme.dart';
 
 class MinePage extends StatelessWidget {
   MinePage({super.key});
@@ -20,8 +21,6 @@ class MinePage extends StatelessWidget {
     "智能分析",
     "设置",
   ];
-
-  final s10 = const Color.fromARGB(255, 0xE7, 0xE9, 0xED);
 
   Widget _buildMineInfoWidget(BuildContext context) {
     return Container(
@@ -126,11 +125,11 @@ class MinePage extends StatelessWidget {
       children: [
         Positioned(top: 0, left: 0, right: 0, bottom: 0, child: Image.asset(MineImages.background_image, fit: BoxFit.cover)),
         Scaffold(
-          backgroundColor: s10,
+          backgroundColor: ThemeColor.s10,
           appBar: AppBar(
             title: const Text('我的'),
             backgroundColor: Colors.transparent,
-            actions: [IconButton(onPressed: () {}, icon: Icon(Icons.mail_outline))],
+            actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.mail_outline))],
           ),
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 15),

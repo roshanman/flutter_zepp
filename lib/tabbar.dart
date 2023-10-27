@@ -42,7 +42,7 @@ class _MainTabBarState extends State<MainTabBar> {
     pages = [
       _TabWidgetConfig(
         tabType: TabType.home,
-        tabWidget: const HomePage(),
+        tabWidget: HomePage(),
         title: '首页',
         icon: Image.asset(TabbarImages.status_unselected, width: 24, height: 24),
         activeIcon: Image.asset(TabbarImages.status, width: 24, height: 24),

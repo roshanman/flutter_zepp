@@ -31,3 +31,8 @@ extension MineImages on String {
   static const String background_image = 'assets/images/profile/mine_background_image.png';
   static const String avatar = 'assets/images/profile/avatar.png';
 }
+
+extension HomeImages on String {
+  static const String logo = 'assets/images/home/logo.png';
+  static const String bg = 'assets/images/home/bg.png';
+}

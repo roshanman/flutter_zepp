@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'pages/login/login_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'pages/mine/mine_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));

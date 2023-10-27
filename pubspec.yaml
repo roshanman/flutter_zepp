@@ -53,3 +53,6 @@ flutter:
 
     - assets/images/profile/mine_background_image.png
     - assets/images/profile/avatar.png
+
+    - assets/images/home/logo.png
+    - assets/images/home/bg.png
